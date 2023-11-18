@@ -35,6 +35,16 @@ function VerifyOtp() {
     }
   };
 
+  const showToast = (message, duration = 2000) => {
+    setToast({ message });
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setToast(null);
+        resolve();
+      }, 1000);
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -43,12 +53,8 @@ function VerifyOtp() {
       const response = await axios.post('/api/user/verifyOtp', { userEnteredOtp });
 
       if (response.status === 200) {
-        setToast({
-          message: "OTP Verified!",
-          onClose: () => {
-            setToast(null);
-          },
-        });
+        await showToast("OTP Verified");
+        setOtpValues(['', '', '', '', '', '']);
       } else {
         setToast({ message: "Something went wrong!" });
       }

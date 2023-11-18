@@ -5,6 +5,7 @@ function userRegisterValidations() {
         body('name', "Name is Required ").notEmpty().isLength({ min: 2, max: 30 }),
         body('mobileNumber',"please Enter Your Mobile Number").isMobilePhone(),
         body('email', "Email is Required ").isEmail(),
+        body('gender',"Please Select Gender").notEmpty()
     ]
 }
 

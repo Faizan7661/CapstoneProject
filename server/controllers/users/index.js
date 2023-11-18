@@ -30,7 +30,6 @@ router.post(
                 mobileNumber,
                 email,
                 gender,
-                age,
                 address,
             } = req.body;
 
@@ -59,7 +58,6 @@ router.post(
                 mobileNumber,
                 email,
                 gender,
-                age,
                 address,
                 otp,
             };

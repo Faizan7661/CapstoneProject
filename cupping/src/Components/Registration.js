@@ -13,7 +13,6 @@ function Registration() {
     mobileNumber: "",
     email: "",
     gender: "",
-    age: "",
     address: "",
   });
 
@@ -26,20 +25,24 @@ function Registration() {
     setUserData({ ...userData, [name]: value });
   };
 
+  const showToast = (message, duration = 2000) => {
+    setToast({ message });
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        setToast(null);
+        resolve();
+      }, 1000);
+    });
+  };
+
   const postData = async () => {
     try {
-      const { name, mobileNumber, email, gender, age, address } = userData;
+      const { name, mobileNumber, email, gender, address } = userData;
 
       const response = await axios.post("/api/user/signUp", { ...userData });
        if (response.status === 200) {
-        setToast({
-          message: "OTP sent successfully. Please check your mobile for verification",
-          onClose: () => {
-            setToast(null);
-            navigate("/verifyOtp")
-          },
-          
-        });
+        await showToast("OTP sent successfully. Please check your mobile for verification");
+        navigate("/verifyOtp");
       } else {
         setToast({ message: "Something went wrong!" });
       }
@@ -140,21 +143,6 @@ function Registration() {
                 <option value="female">Female</option>
                 <option value="not-specified">Rather not say</option>
               </select>
-            </label>
-
-            <label>
-              <span>Age</span>
-              <input
-                required=""
-                placeholder="Enter your Age"
-                type="text"
-                className="w-full border p-2 rounded-[10px] border-solid border-[rgba(105,105,105,0.397)]"
-                name="age"
-                id="age"
-                autoComplete="off"
-                value={userData.age}
-                onChange={handleInput}
-              />
             </label>
 
             <label>

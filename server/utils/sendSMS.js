@@ -2,7 +2,7 @@ import twilio from 'twilio';
 
 
 const accountSid = 'ACb11a4a31b9efb9d78245f332d49cc8d6';
-const authToken = '00a0c929d03b1bcc3af6e85f77f2e46f';
+const authToken = '2e212942b011571484ec63801cc2b19b';
 const client = new twilio(accountSid, authToken);
 
 async function sendSms(to, body) {
