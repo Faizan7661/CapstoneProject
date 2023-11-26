@@ -1,6 +1,7 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Toast from './Toast';
+
 function VerifyOtp() {
   const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
@@ -50,21 +51,25 @@ function VerifyOtp() {
 
     try {
       const userEnteredOtp = otpValues.join('');
-      const response = await axios.post('/api/user/verifyOtp', { userEnteredOtp });
+      const response = await axios.post('/api/user/verifyOtpSignUp', { userEnteredOtp });
 
       if (response.status === 200) {
         await showToast("OTP Verified");
         setOtpValues(['', '', '', '', '', '']);
       } else {
         setToast({ message: "Something went wrong!" });
+
+
       }
     } catch (error) {
       console.error(error);
 
       if (error.response && error.response.status === 400) {
         setToast({ message: "Invalid Registration" });
+
       } else {
         setToast({ message: "Something went wrong!" });
+
       }
     }
   };

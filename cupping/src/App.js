@@ -2,7 +2,9 @@ import './App.css';
 import { Routes, Route } from "react-router-dom";
 import Navbar from './Components/Navbar';
 import Registration from './Components/Registration';
-import VerifyOtp from './Components/VerifyOtp';
+import VerifySignUpOtp from './Components/VerifySignUp'
+import VerifySignInOtp from './Components/VerifySignIn'
+import SignIn from './Components/SignIn';
 
 function App() {
   return (
@@ -11,8 +13,11 @@ function App() {
       <Navbar/>
 
       <Routes>
-        <Route path='/' element={<Registration/>} />
-        <Route path='/verifyOtp' element={<VerifyOtp/>}/>
+        <Route path='/signUp' element={<Registration/>} />
+        <Route path='/verifyOtpSignUp' element={<VerifySignUpOtp/>}/>
+        <Route path ='/signIn' element={<SignIn/>}/>
+        <Route path='/verifyOtpSignIn' element={<VerifySignInOtp/>}/>
+
       </Routes>
       
     </div>

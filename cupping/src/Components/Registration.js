@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
 import axios from "axios";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 import Toast from "./Toast";
-
 
 function Registration() {
   const navigate = useNavigate();
@@ -13,7 +12,8 @@ function Registration() {
     mobileNumber: "",
     email: "",
     gender: "",
-    address: "",
+    area: "",
+    city: "",
   });
 
   const [toast, setToast] = useState(null);
@@ -37,23 +37,24 @@ function Registration() {
 
   const postData = async () => {
     try {
-      const { name, mobileNumber, email, gender, address } = userData;
+      const { name, mobileNumber, email, gender, area, city } = userData;
 
       const response = await axios.post("/api/user/signUp", { ...userData });
-       if (response.status === 200) {
-        await showToast("OTP sent successfully. Please check your mobile for verification");
-        navigate("/verifyOtp");
+      if (response.status === 200) {
+        await showToast(
+          "OTP sent successfully. Please check your mobile for verification"
+        );
+        navigate("/verifyOtpSignUp");
       } else {
-        setToast({ message: "Something went wrong!" });
+        showToast("Something went wrong!");
       }
     } catch (error) {
       console.error(error);
 
-    
       if (error.response && error.response.status === 400) {
-        setToast({ message: "Invalid Registration" });
+        showToast("Invalid Registration");
       } else {
-        setToast({ message: "Something went wrong!" });
+        showToast("Something went wrong!");
       }
     }
   };
@@ -67,7 +68,7 @@ function Registration() {
     <>
       <div className="bg-gray-100 flex items-center justify-center h-screen">
         <div className="card">
-        {toast && <Toast message={toast.message} onClose={toast.onClose} />}
+          {toast && <Toast message={toast.message} onClose={toast.onClose} />}
           <form
             method="POST"
             className="flex flex-col gap-2.5 max-w-[350px] bg-white relative p-5 rounded-[20px]"
@@ -145,20 +146,37 @@ function Registration() {
               </select>
             </label>
 
-            <label>
-              <span>Address</span>
-              <input
-                required=""
-                placeholder="Enter Your Address"
-                type="text"
-                className="w-full border p-2 rounded-[10px] border-solid border-[rgba(105,105,105,0.397)]"
-                name="address"
-                id="address"
-                autoComplete="off"
-                value={userData.address}
-                onChange={handleInput}
-              />
-            </label>
+            <div className="flex space-x-4">
+              <label className="flex flex-col">
+                <span>Area</span>
+                <input
+                  required=""
+                  placeholder="Enter Area"
+                  type="text"
+                  className="w-full border p-2 rounded-[10px] border-solid border-[rgba(105,105,105,0.397)]"
+                  name="area"
+                  id="area"
+                  autoComplete="off"
+                  value={userData.area}
+                  onChange={handleInput}
+                />
+              </label>
+
+              <label className="flex flex-col">
+                <span>City</span>
+                <input
+                  required=""
+                  placeholder="Enter City"
+                  type="text"
+                  className="w-full border p-2 rounded-[10px] border-solid border-[rgba(105,105,105,0.397)]"
+                  name="city"
+                  id="city"
+                  autoComplete="off"
+                  value={userData.city}
+                  onChange={handleInput}
+                />
+              </label>
+            </div>
 
             <button className="bg-[royalblue] text-white text-base p-2.5 rounded-[10px] border-[none] hover:bg-[rgb(56,90,194)]">
               Submit

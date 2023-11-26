@@ -21,8 +21,8 @@ function Navbar() {
         </div> */}
 
         <div className="hidden sm:flex sm:items-center">
-          <a href="#" className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">Sign in</a>
-          <a href="#" className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">Sign up</a>
+          <a href="/signIn" className="text-gray-800 text-sm font-semibold hover:text-purple-600 mr-4">Sign in</a>
+          <a href="/signUp" className="text-gray-800 text-sm font-semibold border px-4 py-2 rounded-lg hover:text-purple-600 hover:border-purple-600">Sign up</a>
         </div>
 
         <div className="sm:hidden cursor-pointer">

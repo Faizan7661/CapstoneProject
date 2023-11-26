@@ -16,13 +16,20 @@ const patientSchema = new mongoose.Schema({
   gender: {
     type: String,
   },
-  address: {
+
+  area: {
     type: String,
+  },
+  city : {
+    type : String,
+  },
+  isMobileVerified : {
+    type : Boolean,
   },
   otp: {
     type: String,
   },
 }, { timestamps: true });
 
-const patientModel = mongoose.model('Patients', patientSchema, 'patients');
+const patientModel = mongoose.model('User_profiles', patientSchema, 'user_profiles');
 export default patientModel;

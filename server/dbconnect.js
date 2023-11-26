@@ -23,11 +23,13 @@
 // dbConnect();
 // dbconnect.js
 import mongoose from 'mongoose';
+import config from 'config'
 
+const mongoString = config.get('MONGO_STRING')
 async function dbConnect() {
   try {
     await mongoose.connect(
-      'mongodb+srv://mdfaizaann:FaizanCodeForIndiaA23@faizan.r6pzw5j.mongodb.net/CuppingAapp',
+      mongoString,
       {
         useNewUrlParser: true,
         useUnifiedTopology: true,

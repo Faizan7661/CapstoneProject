@@ -1,19 +1,22 @@
 import patientModel from '../models/patientModel.js';
 
-async function verifyOtp(mobileNumber, userEnteredOtp, tempUserData) {
+async function verifyOtp(mobileNumber, userEnteredOtp) {
     try {
-        if (tempUserData && tempUserData.mobileNumber === mobileNumber && tempUserData.otp === userEnteredOtp) {
-            return true;
-        }
         const user = await patientModel.findOne({ mobileNumber });
 
         if (!user) {
             return false;
         }
 
+        if (user.otp !== userEnteredOtp) {
+            return false;
+        }
+
         return user.otp === userEnteredOtp;
+
     } catch (error) {
-        console.error(`Error verifying OTP: ${error.message}`);
+        console.error(`Error verifying OTP for ${mobileNumber}: ${error.message}`);
+    
         return false;
     }
 }
