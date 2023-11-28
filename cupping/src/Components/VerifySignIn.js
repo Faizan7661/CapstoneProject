@@ -1,8 +1,11 @@
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
 import Toast from './Toast';
+import { useNavigate } from 'react-router-dom';
 
 function VerifyOtp() {
+
+  const navigate = useNavigate();
   const [otpValues, setOtpValues] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
 
@@ -62,6 +65,7 @@ function VerifyOtp() {
         localStorage.setItem("patientId", JSON.stringify(patientId));
 
         setOtpValues(['', '', '', '', '', '']);
+        navigate("/bookingAppointment")
       } else {
         setToast({ message: "Something went wrong!" });
 

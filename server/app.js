@@ -5,6 +5,8 @@ import connectMongo from 'connect-mongo';
 import mongoose from 'mongoose';
 import './dbconnect.js'
 import userRoutes from './controllers/users/index.js';
+import bookingRoutes from './controllers/routes/bookingAppointment.js'
+import authRoute from './controllers/auth/auth.js'
 const app = express();
 const port = 5003;
 
@@ -29,6 +31,10 @@ app.get('/',(req,res)=>{
 })
 
 app.use('/api/user',userRoutes);
+app.use('/api/user',bookingRoutes);
+app.use('/api/auth',authRoute);
+
+
 
 app.listen(port,()=>{
     console.info(`server is running on port :`, port)
